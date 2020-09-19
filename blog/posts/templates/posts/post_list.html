@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html">
+    <title>Список публикаций</title>
+<style>
+    body {
+  background-color: #FFFFE0;
+  margin:1em auto;
+        max-width:40em;
+        padding:0 .62em;
+        font:1.2em/1.62 sans-serif;
+    }
+
+
+
+
+
+
+
+.category {
+  background-color: #B6D2F1;
+  border-radius: 2px;
+}
+.how {
+  font-size: 20px;
+  text-align: center;
+
+}
+    h1,h2{
+        line-height:1.2;
+}
+</style>
+</head>
+    <body>
+<article>
+    <header>
+        <h1>Список всех публикаций</h1>
+        <br>
+        <!--<aside>Чисто для отладки ежже</aside>-->
+
+    </header>
+    {% for pub in posts %}
+    {% if forloop.first %}
+    <hr>
+    {% endif %}
+
+    <!-- сделать ссылку на статью не в названии статьи а в "читать далее.."-->
+    <h2>{{pub.title}}</h2>
+    {{pub.body|truncatewords:10|linebreaks}}
+    <p><a href="{% url 'posts:article' pub.id %}">Читать далее..</a></p>
+    {% if pub.category %}
+    <p><span class="category"> &nbsp; Категория: {{ pub.category.get_title_display }} &nbsp; </span></p>
+    {% endif %}
+    <p>
+        Публикация {{pub.author}} от {{pub.when_published|date:'Y-b-d H:i'}}
+    </p>
+    {% if not forloop.last %}
+    <hr>
+    {% endif %}
+    {% empty %}
+    <h2>Публикаций нет</h2>
+    <p>Чтобы добавить что-то в список, зайдите в админку и добавьте их оттуда</p>
+    {% endfor %}
+</article>
+</body>
+</html>
