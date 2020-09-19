@@ -139,7 +139,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
     # dsn -нельзя хранить в коде он должен задаваться из переменных окружения на Heroku.
-    dsn="some_dsn", # - эту строчку нельзя хранить в коде
+    dsn="https://86a7cc0234284ee89ae2736752735478@o438318.ingest.sentry.io/5402844", # - эту строчку нельзя хранить в коде
     integrations=[DjangoIntegration()],
     traces_sample_rate = 1.0,
 
